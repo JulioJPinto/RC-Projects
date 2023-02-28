@@ -17,4 +17,3 @@ In __TP1__ we talked about the __COPA Europe__ project.
 - [__Francisco Ferreira__](https://github.com/chicoferreira)
 - [__Júlio Pinto__](https://github.com/JulioJPinto)
 - [__Rui Lopes__](https://github.com/RuiL1904)
-# RC
