@@ -1,0 +1,100 @@
+\documentclass{llncs}
+
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\usepackage{a4}
+\usepackage[margin=3.5cm,nohead,footnotesep=1cm]{geometry}
+\usepackage{epstopdf}
+\usepackage{graphicx}
+\usepackage{fancyvrb}
+\usepackage{amsmath}
+
+% Remove "References" title
+\usepackage{etoolbox}
+\patchcmd{\thebibliography}{\section*{\refname}}{}{}{}
+
+\usepackage[utf8]{inputenc}
+\inputencoding{latin1}
+\inputencoding{utf8}
+
+\begin{document}
+\mainmatter
+
+\title{COPA Europe}
+
+\author{Francisco Ferreira, Júlio Pinto e Rui Lopes}
+
+\institute{
+Universidade do Minho, Departamento de Informática, 4710-057 Braga, Portugal\\
+E-mails: \{\ a100660, a100742, a100643\}@alunos.uminho.pt
+}
+
+\date{}
+\bibliographystyle{splncs}
+
+\maketitle
+
+\section{Introdução}
+No contexto da unidade curricular de Redes de Computadores, decidimos abordar o projeto COPA Europe. Neste trabalho científico, vamos apresentar o seu objetivo, a forma de implementação, as vantagens, desvantagens, bem como a nossa opinião relativamente ao mesmo.
+
+\section{Desenvolvimento}
+
+\subsection{Origem do projeto}
+
+Com o aumento cada vez maior do consumo de \emph{non-linear sports}, como \emph{live streaming} e \emph{eSports}, Konstantinos Zervos, \emph{Managing Director}, e Petros Titis, \emph{Director of Production Services}, decidiram levar a cabo um projeto que pretende explorar e melhorar esta área, com recurso a novas tecnologias. 
+\\
+COPA Europe, ou \textit{COllaborative Platform for trAnsmedia storytelling and cross channel distribution of EUROPEan sport events} é um projeto coordenado pela Worldline, uma multinacional líder europeia no ramo das transações e pagamentos \emph{online}. O projeto conta ainda com um consórcio de empresas, como a IBM e a LiveU.
+
+\subsection{Objetivos}
+
+O principal objetivo do projeto é desenvolver uma plataforma que permita a transmissão, essencialmente, de conteúdos relacionados ao desporto. Além disso, um dos focos principais é o utilizador final e, portanto,  a experiência de \emph{live coverage} dos eventos, com recurso a opções e estratégias bastantes dinâmicas, que passam pela realidade virtual e aumentada, é oferecida tanto aos criadores quanto aos consumidores de conteúdo.
+É de notar também que, uma vez que o mercado atual se centra num monopólio de algumas empresas, um dos objetivos é oferecer alta flexibilidade e disponibilidade de subscrições personalizadas ao nível do utilizador.
+
+\subsection{Implementação}
+
+A essência do projeto concentra-se na implementação de um serviço \emph{over-the-top} (OTT). Um serviço destes é, basicamente, uma rede virtual de \emph{overlay} que atua por cima dos layers 2, 3 e 4 da internet\footnote{node-to-node transfer por MAC Adress, IP Adress e UDP/TCP, respetivamente.}. Uma vez que esta rede é virtual, é facilmente escalável e permite grande flexibilidade - a rede pode ser reconfigurada ou movida sem afetar a infraestrutura física subjacente. Além disso, este tipo de redes contam, normalmente, com uma grande capacidade de tolerância a falhas - se um nó ou \emph{link} falhar, a rede ainda poderá operar. Netflix e WhatsApp são exemplos bastantes conhecidos que utilizam também esta tecnologia como base.
+\\
+A criação desta plataforma está também assente na utilização de uma \emph{blockchain}, que melhora a segurança e fiabilidade do projeto. Resumidamente, esta tecnologia é um sistema digital que permite realizar transações de forma segura, transparente e imutável. É composta por blocos que são ligados uns aos outros e que contém informações criptografadas. Cada bloco adicionado é verificado e validado por uma rede de computadores, conhecida como "nós", que são responsáveis por manter a integridade e segurança da \emph{blockchain}. Apesar desta tecnologia ser amplamente conhecida pelo seu uso nas criptomoedas, como \textit{Bitcoin} e \textit{Ethereum}, a sua aplicação aqui é bastante fulcral, pois permite, por exemplo, maior transparência na remuneração dos criadores de conteúdo.
+\\
+\\
+A experiência personalizada ao nível do utilizador pretende ser alcançada recorrendo ao uso de aprendizagem automática, mais especificamente ao uso de federated learning. Esta forma de aprendizagem consiste na utilização do dispositivo do utilizador final, em situações que não impactam negativamente o seu uso, para treinar um modelo inteligente sem precisar de qualquer informação do mesmo. A tecnologia é excelente para trazer a cada utilizador uma experiência personalizada, já que não existirá possibilidade de fugas de informação, cumprindo assim questões éticas no que toca à privacidade de dados. Um exemplo muito conhecido que utiliza esta tecnologia é o \emph{GBoard} da Google, por forma a ter sugestões diferentes consoante o utilizador.
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.15]{federated_learning.png}
+    \caption{\emph{Federated learning}} \cite{federated_learning}
+\end{figure}
+\\
+\noindent Às tecnologias já referidas, alia-se também o 5G - que pretende melhorar, em muito, as conexões em tempo real. 5G é a quinta geração de redes móveis e de banda larga. Por usar frequências de rádio mais altas, esta tecnologia permite conseguir velocidades de transferência bastante mais altas do que as anteriores\footnote{3G e 4G, por exemplo.}.
+
+\subsection{Vantagens e desvantagens}
+
+\subsubsection{Vantagens}
+Uma vez que a plataforma opera sobre uma \emph{blockchain}, torna-se mais justo e transparente a forma como os criadores de conteúdo são remunerados, já que não existe a necessidade de um \emph{middleman}. Além disso, os utilizadores conseguem acessar os conteúdos de forma mais fácil e segura. Ficam todos a ganhar. A utilização de novas tecnologias é também muito vantajosa para o projeto, pois torna a plataforma mais moderna e cativante.
+
+\subsubsection{Desvantagens}
+Ainda que referido em cima que a utilização de novas tecnologias é vantajosa, o mesmo ponto é também uma desvantagem. Afinal de contas, tecnologias recentes tendem a ser mais caras - o que levaria a que os utilizadores tivessem um custo superior a pagar pela utilização. Além disso, é de notar que muitas das tecnologias prometidas na implementação são embrionárias, nomeadamente alguns ramos da realidade aumentada e o 5G. Também, apesar do sistema ser descentralizado, é centralizado na medida em que todos os conteúdos se acoplam num local. Isto oferece menos hipóteses a um utilizador comum, o que acaba por ser mau.
+
+\section{Conclusão}
+A realidade é que o problema que este projeto pretende resolver já se encontra resolvido, na nossa visão. 
+Criadores de conteúdo conseguem, atualmente, realizar grande parte do que está a ser desenvolvido na COPA Europe - utilizando plataformas de \emph{streaming} como a Twitch e o YouTube. No que toca a remuneração, ainda que a COPA Europe ofereça opções mais fiáveis, a mesma seria superior nas plataformas referidas, já que existem serviços de anúncios a funcionar em simultâneo com as \emph{streams}, por exemplo.
+\\
+Mesmo com o crescimento do consumo de \emph{eSports} e com possibilidades desse mercado ser explorado, a comunidade pertencente ao mesmo já se encontra "alojada" nas plataformas referidas. É necessário um trabalho exímio da COPA Europe para que, por exemplo, o \emph{Worlds} (torneio mundial de \emph{League of Legends}) ou o \emph{Major} (torneio mundial de \emph{Counter-Strike Global Offensive}) saiam do seu conforto habitual. É um facto que a COPA Europa já entrou em contacto com a ESL (liga principal de \emph{Counter-Strike Global Offensive}) e o esquema pode mudar, mas é algo reticente, a nosso ver.
+\\
+\\
+Sentimos que as tecnologias pretendidas para alcançar o auge do projeto são, em parte, complicadas de desenvolver e gerir. Consideramos até que algumas se encontram um pouco fora de contexto. A questão de, por exemplo, utilizar uma \emph{blockchain} é interessante, mas parece que foi colocada à força no projeto simplesmente com base no \emph{hype} de Web3. \\
+Em suma, achamos que o projeto num todo acaba por ser uma ideia interessante, mas, como dito previamente, pretende resolver um problema que já se encontra resolvido. Assim sendo, acreditamos que este não conseguirá singrar. \\
+
+\noindent \large{\textbf{Referências}}
+
+\begin{thebibliography}{9}
+
+\bibitem{federated_learning}
+Federated Learning. Acedido em: 26 de feveriro de 2023, em https://en.wikipedia.org/wiki/Federated\_learning
+
+\bibitem{copa_europe}
+COPA Europe. Acedido em: 25 de fevereiro de 2023, em https://copaeurope.eu
+
+\end{thebibliography}
+
+\end{document}
