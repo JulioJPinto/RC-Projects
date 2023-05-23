@@ -13,6 +13,7 @@ These projects were developed for the Computer Networks (PT - Redes de Computado
 Note that these projects were done in European Portuguese.
 
 - __TP1__: We made a small paper about the __COPA Europe__ project.
+- __TP2__: We were asked to simulations and analyze them using __CORE Emulator__.
 
 ## Contributors
 - [__Francisco Ferreira__](https://github.com/chicoferreira)
