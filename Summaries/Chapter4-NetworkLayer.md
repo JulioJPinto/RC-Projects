@@ -91,15 +91,14 @@ Source sends serires of UDP segments to dest
 - first set has TTL = 1, etc.
 - unlikely port number
 
-When the n set of datagrams arrives to n router, the router discards the datagrams and sends to source ICMP messages (type 11, code 0). ICMP messages includes name of router & IP address
-
+When the n set of datagrams arrives to n router, the router discards the datagrams and sends to source ICMP messages (type 11, code 0). ICMP messages includes name of router & IP address.\
 When the ICMP messages arrive to the src records RTTs
 
 __Stopping Criteria:__
 UDP segment eventually arrives at dest host. The dest returns ICMP "port unreachable" message (type 3, code 3). The src stops
 
 #### IP datagram format
-How muuch overhead?
+How much overhead?
 - 20 bytes of TCP
 - 20 bytes of IP
 $0 bytes + app layer overhead
@@ -118,10 +117,11 @@ __Manipulated fiels in IPv4 fragmentation:__
 
 IPv6 by default doesnt use fragmentation! 
 
-### IP Addressing
-The *IP adress* is a 32-bit identifier for host, router interface (connection between host/router and physical link). IP addresses associated with each interface.
+#### IP Addressing
+The *IP adress* is a 32-bit identifier for host, router interface (connection between host/router and physical link). IP addresses associated with each interface.\
 
-IPv4: *32-bit* unsigned binary value __(xxxxxxxx.xxxxxxxx.xxxxxxxx.xxxxxxxx)__. A part identifies the network/subnet and the other the host interface in that network. In the Internet each adress must be unique. Theses addresses are distribuited by 5 class (A to E), these classes are given by IANA(Internet Assigned Number Authority)
+### __IPv4__
+ *32-bit* unsigned binary value __(xxxxxxxx.xxxxxxxx.xxxxxxxx.xxxxxxxx)__. A part identifies the network/subnet and the other the host interface in that network. In the Internet each adress must be unique. Theses addresses are distribuited by 5 class (A to E), these classes are given by IANA(Internet Assigned Number Authority)
 
 | Class | Identifier | Network Address | Destinatary Address |
 | :---: | :---: | :---: | :---: |
@@ -204,8 +204,7 @@ __Dynamic__ - Routes are updated
 
 #### Default Route 
 
-The Default route is a route thats used when the specified route does not exist in the routing table for the dest network. Its a specific static route. It has the least priority when compared to other routes and its identified by the term default or 0.0.0.0
-
+The Default route is a route thats used when the specified route does not exist in the routing table for the dest network. Its a specific static route. It has the least priority when compared to other routes and its identified by the term default or 0.0.0.0\
 The routing protocols work has a graph and calculate the best routing for a certain dest.
 
 #### Dynamic route computation
@@ -219,4 +218,48 @@ __Utilized Principle__:
 - Link State - Open Shortest Path First (OSPF)(uses Dijkstra's algorithm)
 
 #### Route computation
+A router can know either static or dynamic routes for the same dest, these are learned via diferent protocols.\
+How does it select which route is "better"
+- __distance__  - administrative indicator
+- __metric__ - indicator that translates the cost of forwarding something via a determined interface
 
+An administrative domain with a well define routing policy is called an Autonomous System (eg. ISPs)
+
+__Route aggregation__: Hierarchical addressing allows efficient advertisement of routing information\
+__More specific routes__: ISPs-R-Us has a more specific route
+
+### NAT: Network Address Translation
+
+#### Motivation
+Local network uses just one IP address as far as outside world is concerced:
+
+- one public IP address can be used for all devices (then private addresses)
+- can change addresses of devices in local network
+- can change ISP without changing addresses of devices
+
+#### Implementation
+
+- ***outgoing datagrams***: replace (src IP address, port #) of every outgoing datagram (NAT IP address, new port #)
+- ***remember*** (in NAT translation table) every (source IP address, port #) to (NAT IP address, new port #) translation pair
+- ***incoming datagrams***: replace (NAT IP address, new port #) in dest fields of every incoming datagram with corresponding (src IP address, port #) stored in NAT table
+
+
+16 bit port number field, 60k simultaneous connections with a single LAN-side address
+NAT is controversial router should only process up to layer 3 and it violates end to end argument (it needs to be taken into account by app designers) Address shortage should instead be solved by IPv6
+
+### IPv6
+
+__Initial Motivation__: 32 bit address exhaustion
+
+#### Datagram format
+Fixed lenght 40 byte header\
+No fragmentation  allowed, by default
+
+- **Traffic Class**: set priority among datagrams in flow
+- **Flow Label**: Identify datagrams in same "flow" (concept not well defined)
+- **Next Header**: Identify upper layer protocol for data
+
+#### IPv6 vs IPv4
+- **checksum**: removed entirely to reduce processing time at each hop
+- **options**: allowed, but outside of header, indicated by "Next Header" field
+- **ICMPv6**: new version of ICMP
