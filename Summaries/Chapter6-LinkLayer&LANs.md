@@ -82,7 +82,7 @@ __Bit Pattern__:
 | D: Data bits to be sent | R: CRC bits |
 
 __Mathematical Formula__:
-$D*2^r XOR R
+$D*2^r XOR R$
 
 ## Multiple Access Protocols
 
@@ -215,3 +215,77 @@ Each adapter on LAN has an unquie address.
 MAC address allocation administered by IEEE. The manufacturer buys portion of the address space.
 
 #### ARP: Address resolution protocol
+
+In order to determine the MAC address' inteface knowing its IP address we use the __ARP Table__: each IP node (host, router) on LAN has a table.
+- IP/MAC address mappings for some LAN nodes: < IP address; MAC address; TTL (Time to live)>
+
+## Ethernet
+
+The __"dominant"__ wired LAN technology. It was the first widely used LAN technology since it was simple and cheap. It works with a single chip and uses multiple seeds. It also kept up with speed race (10 Mbps - 40 Gbps)
+
+#### Physical topology
+
+__bus__: All nodes in same collision domain, they can collide with each other\
+__star__: Active switch center, each "spoke" runs a separate Ethernet protocol this way nodes do not collide with each other
+
+#### Frame structure
+
+__Preamble__ - 7 bytes with patter 10101010 folly by one byte with pattern 10101011, this is used to synchronize receiver and sender clock rates
+
+__Addresses__: 6 byte source, destintion MAC addresses
+
+__Type__: indicates higher layer protocol
+
+__CRC__: cyclic redundancy check at receiver
+
+#### Unreliable, Connectionless
+
+__Connectionless__: No handshaking between sending and receiving NICs
+__Unreliable__: receiving NIC doesn't send acks for nacks to sending NIC\
+Ethernet's MAC protcol: __CSMA/CD__
+
+## Switches & VLANS
+
+### Ethernet Switch
+The ethernet switch is a link-layer devices. It takes an active role in storing and forwarding Ethernet frames. It also examines incoming frame's MAC address, selectively. This switch is also very transparent since the host are unaware of its presence. It follows a plug-and-play and self-learning since it doesn't need to be configured.
+
+#### Multiple simultaneous Transmissions
+
+Host have dedicated direct connection to switch, and there's a switches buffer packets.  The ethernet protocol used on each incoming link allows for no collisions and full duplex. Each link has its own collision domain 
+
+__How does the switch know what interface connects to each host?__
+For that its used a __Switch table__ with each entry, its pretty similar to a routing table.
+
+__How are entries created and maintained?__ Due to its self-learning pattern the switch *learns* which hosts can be reached through which interfaces
+
+#### Frame filtering/Forwarding
+
+When the frame is received at switch:
+1. it records the incoming link, the MAC address of sending host
+2. it indexs the switch table using MAC destination address
+3. __if__ the entry is found for dest\
+__then__ {\
+__if__ dest is on the segment from which frame arrived\
+__then__ it drops the frame\
+__else__ it forwards the frame on interface indicated by entry\
+}\
+__else__ flood, basically it forwards the frame on all interfaces except arriving
+interface 
+
+#### Interconnecting Switches
+
+Its possibles switches can be connected together, you may be wandering how then can I connect to a host after multiple layers of switches but just like it was mentioned previously due to the self learning nature of switches.
+
+#### Switches vs. Router
+
+In both cases they are store-and-forward. __Routers__ work has a network-layer device meanwhile __switches__ work has link-layer devices. Another thing they have in common is that both have forwarding tables. Whilst __routers__ compute the tables using routing algorithms (IP addresses), __switches__ learn how to populate their forwarding table using flooding, learning and MAC addresses.
+
+### VLANs
+
+VLAN or Virtual Local Area Network can be configured to define multiple virtual LANs over a single physical LAN infrstructure.
+
+#### Port based VLAN
+This VLANs basically work with __traffic isolation__, __dynamic membership__ and __forwarding between themselves__.
+
+#### VLANs spanning multiple switches
+In this cases it exists a __trunk port__ that carries frames between VLANs defined over multiple physical swithces.
